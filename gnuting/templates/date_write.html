@@ -1,0 +1,64 @@
+{% extends 'nav.html' %} {% load static %} {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/write.css' %}" />
+    <title>이상형 글쓰기</title>
+  </head>
+  <body>
+    <section class="container">
+      <form action="" method="post">
+        <!--제목 입력-->
+        <input type="text" class="title" placeholder="제목을 입력해주세요" />
+
+        <!--내용 입력-->
+        <textarea class="contents" placeholder="내용을 입력해주세요">
+Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatibus, impedit adipisci commodi eum iure doloribus incidunt quo minus aliquam consectetur eveniet natus omnis praesentium. Accusantium officia ipsum sunt illo adipisci?</textarea
+        >
+
+        <!--부가정보 타이틀-->
+        <div>
+          <span class="info_title">부가정보 입력</span>
+          <span class="info_small_title"
+            >부가정보를 입력하시면 성공할 확률이 올라갑니다!</span
+          >
+        </div>
+
+        <!--부가정보 입력-->
+        <article class="info_contents">
+          <!--키 입력-->
+          <div>
+            <label for="info_label">당신의 키</label>
+            <select name="height" class="height">
+              {% for height in heights %}
+              <option value="{{height}}">{{height}}CM</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <!--MBTI 입력-->
+          <div>
+            <label for="info_content">MBTI</label>
+            <select name="mbti">
+              {% for person in mbti %}
+              <option value="{{person}}">{{person}}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <!--취미 입력-->
+          <div>
+            <label for="info_content">취미</label>
+            <input type="text" placeholder="ex)게임, 운동" />
+          </div>
+        </article>
+
+        <button type="submit" class="btn">작성하기</button>
+      </form>
+    </section>
+  </body>
+</html>
+{% endblock %}

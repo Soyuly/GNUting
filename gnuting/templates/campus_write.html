@@ -1,0 +1,80 @@
+{% extends 'nav.html' %} {% load static %} {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/write.css' %}" />
+    <title>과팅 글쓰기</title>
+  </head>
+  <body>
+    <section class="container">
+      <form action="" method="post">
+        <!--제목 입력-->
+        <input type="text" class="title" placeholder="제목을 입력해주세요" />
+
+        <!--내용 입력-->
+        <textarea class="contents" placeholder="내용을 입력해주세요">
+Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatibus, impedit adipisci commodi eum iure doloribus incidunt quo minus aliquam consectetur eveniet natus omnis praesentium. Accusantium officia ipsum sunt illo adipisci?</textarea
+        >
+
+        <!--부가정보 타이틀-->
+        <div>
+          <span class="info_title">부가정보 입력</span>
+          <span class="info_small_title"
+            >부가정보를 입력하시면 성공할 확률이 올라갑니다!</span
+          >
+        </div>
+
+        <!--부가정보 입력-->
+        <article class="info_contents">
+          <!--과 입력-->
+          <div>
+            <label for="major">MAJOR</label>
+            <input type="major" placeholder="ex)컴퓨터과학과" />
+          </div>
+
+          <!--인원 수 입력-->
+          <div>
+            <label for="count">인원 수</label>
+            <select name="count">
+              {% for person in persons %}
+              <option value="{{person}}">{{person}}명</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <!--희망시간 입력-->
+          <div>
+            <label for="time">희망 시간</label>
+
+            <!--월-->
+            <select name="time" class="time">
+              {% for month in months %}
+              <option value="{{month}}">{{month}}월</option>
+              {% endfor %}
+            </select>
+
+            <!--일-->
+            <select name="time" class="time">
+              {% for day in days %}
+              <option value="{{day}}">{{day}}일</option>
+              {% endfor %}
+            </select>
+
+            <!--분-->
+            <select name="time" class="time">
+              {% for hour in hours %}
+              <option value="{{hour}}">{{hour}}시</option>
+              {% endfor %}
+            </select>
+          </div>
+        </article>
+
+        <button type="submit" class="btn">작성하기</button>
+      </form>
+    </section>
+  </body>
+</html>
+{% endblock %}

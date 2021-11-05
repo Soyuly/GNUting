@@ -1,0 +1,59 @@
+{% extends 'nav.html' %} {% load static %} {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>마이 페이지</title>
+    <link rel="stylesheet" href="{% static 'css/mypage.css' %}" />
+  </head>
+  <body>
+    <section class="container">
+      <h1>계정정보</h1>
+
+      <article class="detial_items">
+        <div class="contents">
+          <div class="item">아이디</div>
+          <span class="item_font">abcd1234</span>
+        </div>
+
+        <div class="contents">
+          <div class="item">학과</div>
+          <span class="item_font">컴퓨터과학과</span>
+        </div>
+
+        <div class="contents">
+          <div class="item">학번</div>
+          <span class="item_font">20180101234</span>
+        </div>
+
+        <div class="contents">
+          <div class="item">이름</div>
+          <span class="item_font">홍길동</span>
+        </div>
+
+        <div class="contents">
+          <div class="item">닉네임</div>
+          <span class="item_font">그누팅 관리자</span>
+        </div>
+
+        <div class="contents">
+          <div class="item">생년월일</div>
+          <span class="item_font">2002년 1월 1일</span>
+        </div>
+
+        <div class="contents">
+          <div class="item gender">성별</div>
+          <span class="item_font">남자</span>
+        </div>
+      </article>
+
+      <div class="btns">
+        <button class="mypage_btn">로그아웃</button>
+        <button class="mypage_btn">정보수정</button>
+      </div>
+    </section>
+  </body>
+</html>
+{% endblock %}

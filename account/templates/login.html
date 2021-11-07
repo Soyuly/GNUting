@@ -1,0 +1,46 @@
+{% extends 'nav.html' %} {% load static %} {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/login.css' %}" />
+    <script src="{% static 'js/login.js' %}" defer></script>
+    <title>로그인</title>
+  </head>
+  <body>
+    <div class="main_container">
+      <div class="logo_container">
+        <a href="./index.html">
+          <img src="./img/logo.png" alt="" />
+        </a>
+      </div>
+      <form action="{% url 'login_backend' %}" method="POST">
+      {% csrf_token %}
+      <div class="login_container">
+        <div class="text_name">
+          <a>ID</a>
+        </div>
+        <div>
+          <input type="text" name="id" class="input_text" />
+        </div>
+        <div class="text_name">
+          <a>PW</a>
+        </div>
+        <div>
+          <input type="password" name="password" class="input_text" />
+        </div>
+        <div>
+          <button class="input_button">로그인</button>
+        </div>
+        <div class="text_signup">
+          아이디가 없다면?
+          <a href="{% url 'signup' %}" class="text_href">회원가입 하기</a>
+        </div>
+      </div>
+    </div>
+  </form>
+  </body>
+</html>
+{% endblock %}

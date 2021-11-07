@@ -1,0 +1,46 @@
+{% extends 'nav.html' %} {% load static %} {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>과팅 게시글</title>
+    <link rel="stylesheet" href="{% static 'css/campus_detail.css' %}" />
+  </head>
+  <body>
+    <div class="header">
+      <div class="container">
+        <span class="head">저희랑 3대3 과팅하실분 구해요!</span>
+        <span class="revise">
+          <a href="#">수정</a>
+        </span>
+        <span class="delete">
+          <a href="#">삭제</a>
+        </span>
+      </div>
+      <div class="text">
+        컴퓨터과학과 18학번 2명, 19학번 1명 과팅할 과 구합니다<br />
+        재밌게 해드릴테니 연락주세요ㅎㅎ
+      </div>
+      <div class="information">
+        <span class="info">정보</span>
+        <span class="info-write">글쓴이가 입력한 정보입니다.</span>
+        <div class="info-list">
+          <span class="gender">성별: </span>
+          <span class="gender-spec">남자</span>
+          <span class="major">학과: </span>
+          <span class="major-spec">컴퓨터과학과</span>
+          <span class="count">인원수: </span>
+          <span class="count-spec">2명</span>
+          <span class="time">시간: </span>
+          <span class="time-spec">10월 11일 21시</span>
+        </div>
+      </div>
+      <form action="text-right" class="reply">
+        <input type="text" placeholder="댓글을 입력하세요" class="reply-text" />
+      </form>
+    </div>
+  </body>
+</html>
+{% endblock %}

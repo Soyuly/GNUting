@@ -1,0 +1,83 @@
+{% extends 'nav.html' %} {% load static %} {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+    <script src="{% static 'js/main.js' %}" defer></script>
+    <title>MAIN</title>
+  </head>
+  <body>
+    <div class="main_container">
+      <div class="img_container">
+        <div class="slide_container">
+          <div class="slide_image_container">
+            <img
+              src="{% static 'img/image_1.png' %}"
+              width="50000px"
+              height="400px"
+              alt="1"
+              class="slide_content slide_1"
+            />
+            <img
+              src="{% static 'img/image_2.png' %}"
+              alt="2"
+              class="slide_content slide_2"
+            />
+            <img
+              src="{% static 'img/image_3.png' %}"
+              alt="3"
+              class="slide_content slide_3"
+            />
+            <img
+              src="{% static 'img/image_4.png' %}"
+              alt="4"
+              class="slide_content slide_4"
+            />
+          </div>
+          <div class="slide_button_container">
+            <button
+              class="slide_button_content slide_button_1"
+              onclick="click_Btn1()"
+            ></button>
+            <button
+              class="slide_button_content slide_button_2"
+              onclick="click_Btn2()"
+            ></button>
+            <button
+              class="slide_button_content slide_button_3"
+              onclick="click_Btn3()"
+            ></button>
+            <button
+              class="slide_button_content slide_button_4"
+              onclick="click_Btn4()"
+            ></button>
+          </div>
+        </div>
+        <div class="underimg_container">
+          <div>
+            <a href="">
+              <img
+                src="{% static 'img/under_image_1.png' %}"
+                alt=""
+                class="underimg_content underimg_1"
+              />
+            </a>
+          </div>
+          <div>
+            <a href="">
+              <img
+                src="{% static 'img/under_image_1.png' %}"
+                alt=""
+                class="underimg_content underimg_2"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+{% endblock %}

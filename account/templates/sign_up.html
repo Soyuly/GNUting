@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/sign_up.css' %}" />
+    <script src="{% static 'js/sign_up.js' %}" defer></script>
+    <title>회원가입</title>
+  </head>
+  <o>
+    <div class="main_container">
+      <div class="sign_up_container">
+
+        <div class="text_big">회원가입</div>
+        <form action="{% url 'signup_backend' %}" method="POST">
+          {% csrf_token %}
+        <div class="text_name">아이디</div>
+        <div>
+          <input type="text" name="id" class="input_text" />
+        </div>
+        <div class="text_name">비밀번호</div>
+        <div>
+          <input type="password" name="password" class="input_text" required/>
+        </div>
+        <div class="text_name">학과</div>
+        <div>
+          <select name="major" id="depart" class="input_select">
+            <option value="">선택하세요.</option>
+            <option value="컴퓨터과학과" name="major">컴퓨터과학과</option>
+          </select>
+        </div>
+        <div class="text_name">이름</div>
+        <div>
+          <input type="text" name="name" class="input_text" />
+        </div>
+        <div class="text_name">닉네임</div>
+        <div>
+          <input type="text" name="nickname" class="input_text" />
+        </div>
+        <div class="text_name">생년월일</div>
+        <div>
+          <input type="date" name="birth" class="input_text" />
+        </div>
+        <div class="text_name">성별</div>
+        <div>
+          <select name="gender" id="sex"  class="input_select">
+            <option value="m">남</option>
+            <option value="f">여</option>
+          </select>
+        </div>
+        <div class="container_button">
+          <button class="input_button">가입</button>
+        </div>
+      </div>
+    </div>
+  </form>
+  </body>
+</html>

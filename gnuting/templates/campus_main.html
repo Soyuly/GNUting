@@ -1,0 +1,83 @@
+{% extends 'nav.html' %} {% load static %} {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>과팅 게시판</title>
+    <link rel="stylesheet" href="{% static 'css/campus_main.css' %}" />
+  </head>
+  <body>
+    <div class="board">
+      <a href="{% url 'campus_write' %}" class="write">글쓰기</a>
+      <table class="board_list">
+        <caption>
+          게시판 목록
+        </caption>
+        <thead>
+          <tr>
+            <th>학과</th>
+            <th>제목</th>
+            <th>인원수</th>
+            <th>성별</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>컴퓨터과학과</td>
+            <td class="click">
+              <a href="#">저희랑 3대3 과팅하실분 구해요!</a>
+            </td>
+            <td>3명</td>
+            <td class="gender-man">남자</td>
+          </tr>
+          <tr>
+            <td>민속무용학과</td>
+            <td class="click">
+              <a href="#">저희랑 2대2 과팅 하실분 구해요!</a>
+            </td>
+            <td>2명</td>
+            <td class="gender">여자</td>
+          </tr>
+          <tr>
+            <td>간호학과</td>
+            <td class="click"><a href="#">저희랑 신나게 노실 분들!</a></td>
+            <td>3명</td>
+            <td class="gender">여자</td>
+          </tr>
+          <tr>
+            <td>경영학과</td>
+            <td class="click"><a href="#">재밌는분들 저희랑 놀아요~!</a></td>
+            <td>3명</td>
+            <td class="gender">여자</td>
+          </tr>
+          <tr>
+            <td>영어영문학과</td>
+            <td class="click"><a href="#">저희랑 4대4 과팅 하실분!</a></td>
+            <td>4명</td>
+            <td class="gender">여자</td>
+          </tr>
+          <tr>
+            <td>식품영양학과</td>
+            <td class="click">
+              <a href="#">저희랑 3대3 과팅 하실분 구해요!</a>
+            </td>
+            <td>3명</td>
+            <td class="gender">여자</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="page">
+        <a href="#">&lt;</a>
+        <a href="#">1</a>
+        <a href="#">2</a>
+        <a href="#">3</a>
+        <a href="#">4</a>
+        <a href="#">5</a>
+        <a href="#">&gt;</a>
+      </div>
+    </div>
+  </body>
+</html>
+{% endblock %}

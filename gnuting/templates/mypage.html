@@ -15,43 +15,48 @@
       <article class="detial_items">
         <div class="contents">
           <div class="item">아이디</div>
-          <span class="item_font">abcd1234</span>
-        </div>
-
-        <div class="contents">
-          <div class="item">학과</div>
-          <span class="item_font">컴퓨터과학과</span>
-        </div>
-
-        <div class="contents">
-          <div class="item">학번</div>
-          <span class="item_font">20180101234</span>
+          <span class="item_font">{{request.user.get_username}}</span>
         </div>
 
         <div class="contents">
           <div class="item">이름</div>
-          <span class="item_font">홍길동</span>
+          <span class="item_font">{{user.name}}</span>
+        </div>
+
+        <div class="contents">
+          <div class="item">학과</div>
+          <span class="item_font">{{user.major}}</span>
         </div>
 
         <div class="contents">
           <div class="item">닉네임</div>
-          <span class="item_font">그누팅 관리자</span>
+          <span class="item_font">{{user.nickname}}</span>
         </div>
 
         <div class="contents">
           <div class="item">생년월일</div>
-          <span class="item_font">2002년 1월 1일</span>
+          <span class="item_font">{{user.birth}}</span>
         </div>
 
         <div class="contents">
           <div class="item gender">성별</div>
-          <span class="item_font">남자</span>
+          <span class="item_font">{{user.gender}}</span>
         </div>
       </article>
 
       <div class="btns">
-        <button class="mypage_btn">로그아웃</button>
-        <button class="mypage_btn">정보수정</button>
+        <button
+          class="mypage_btn"
+          onclick="location.href='{% url 'logout_backend' %}'"
+        >
+          로그아웃
+        </button>
+        <button
+          class="mypage_btn"
+          onclick="location.href='{% url 'edit_account' user.id %}'"
+        >
+          정보수정
+        </button>
       </div>
     </section>
   </body>

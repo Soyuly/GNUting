@@ -16,9 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from gnuting import views
+from django.urls.conf import include
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.date_write, name='date_write'),
+    path('', views.main, name='main_logout'),
+    path('main/<str:user_id>', views.main_login, name='main'),
+    path('campus_main', views.campus_main, name='campus_main'),
+    path('campus_detail', views.campus_detail, name='campus_detail'),
     path('campus_write', views.campus_write, name='campus_write'),
-    path('mypage',views.mypage, name='mypage'),
+    path('mypage/<str:user_id>', views.mypage, name='mypage'),
+    path('', include('account.urls')),
 ]

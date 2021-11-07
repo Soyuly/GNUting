@@ -2,11 +2,34 @@
 <link rel="stylesheet" href="{% static 'css/nav.css' %}" />
 
 <nav class="nav_container">
-  <img src="{% static 'img/logo.png' %}" class="logo" />
+  {% if request.user.is_authenticated %}
+  <a href="{% url 'main' user.id %}"
+    ><img src="{% static 'img/logo.png' %}" class="logo"
+  /></a>
+  {% else %}
+  <a href="{% url 'main_logout'%}"
+    ><img src="{% static 'img/logo.png' %}" class="logo"
+  /></a>
+  {% endif %}
   <div class="nav_menu"><a href="#">이상형 찾기</a></div>
-  <div class="nav_menu"><a href="#">과팅매칭</a></div>
-  <div class="nav_menu"><a href="#">마이페이지</a></div>
-  <div class="nav_menu_last"><a href="#">로그아웃</a></div>
+  <div class="nav_menu"><a href="{% url 'campus_main' %}">과팅매칭</a></div>
+  {% if request.user.is_authenticated %}
+  <div class="nav_menu">
+    <a href="{% url 'mypage' user.id %}">마이페이지</a>
+  </div>
+  {% else %}
+  <div class="nav_menu">
+    <a href="{% url 'login' %}" onclick="alert('로그인이 필요합니다.');"
+      >마이페이지</a
+    >
+  </div>
+  {% endif %} {% if request.user.is_authenticated %}
+  <div class="nav_menu_last">
+    <a href="{% url 'logout_backend' %}">로그아웃</a>
+  </div>
+  {% else %}
+  <div class="nav_menu_last"><a href="{% url 'login' %}">로그인</a></div>
+  {% endif %}
 </nav>
 
 {% block content %} {% endblock %}

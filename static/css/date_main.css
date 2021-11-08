@@ -1,0 +1,81 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+caption {
+    display: none;
+}
+
+td a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.board {
+    padding: 50px;
+}
+
+.board .write {
+    text-decoration: none;
+    color: #7A7979;
+    display: block;
+    text-align: right;
+}
+
+.board_list {
+    width: 100%;
+    border-top: 1px solid #E0E0E0;
+    color: #848484;
+}
+
+.board_list tr {
+    border-bottom: 1px solid #E0E0E0;
+}
+
+.board_list th,
+.board_list td {
+    padding: 20px;
+}
+
+.board_list td {
+    text-align: center;
+}
+
+.board_list .click {
+    cursor: pointer;
+}
+
+.board_list .click:hover {
+    text-decoration: underline;
+}
+
+.board .board_list .male {
+    color: #5CC7F0;
+}
+
+.board .board_list .female {
+    color: red;
+}
+
+.board .page {
+    margin-top: 20px;
+    text-align: center;  
+}
+
+.board .page a {
+    margin-left: 10px;
+    text-decoration: #7a7979;
+}
+
+.board .page a:hover {
+    text-decoration: underline;
+}
+
+.reply {
+    margin-top: 10px;
+}

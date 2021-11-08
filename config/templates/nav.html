@@ -11,7 +11,7 @@
     ><img src="{% static 'img/logo.png' %}" class="logo"
   /></a>
   {% endif %}
-  <div class="nav_menu"><a href="#">이상형 찾기</a></div>
+  <div class="nav_menu"><a href="{% url 'date_main' %}">이상형 찾기</a></div>
   <div class="nav_menu"><a href="{% url 'campus_main' %}">과팅매칭</a></div>
   {% if request.user.is_authenticated %}
   <div class="nav_menu">

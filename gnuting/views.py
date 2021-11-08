@@ -18,6 +18,11 @@ def main_login(request, user_id):
         print('성공')
         return render(request, 'main.html', {'user': user})
 
+def date_main(request):
+    return render(request, 'date_main.html')
+
+def date_detail(request):
+    return render(request, 'date_detail.html')
 
 def date_write(request):
     mbti = ["ISTJ", "ISFJ", "INFJ", "INTJ", "ISTP", "ISFP", "INFP", "INTP",

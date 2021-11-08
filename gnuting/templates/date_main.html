@@ -1,0 +1,85 @@
+{% extends 'nav.html' %} {% load static %} {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>이상형 게시판</title>
+    <link rel="stylesheet" href="{% static 'css/date_main.css' %}" />
+  </head>
+  <body>
+    <div class="board">
+      <a href="{% url 'date_write' %}" class="write">글쓰기</a>
+      <table class="board_list">
+        <caption>
+          게시판 목록
+        </caption>
+        <thead>
+          <tr>
+            <th>성별</th>
+            <th>제목</th>
+            <th>나이</th>
+            <th>좋아요</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="male">남자</td>
+            <td class="click">
+              <a href="#">같이 산책하고 영화 보러 갈 사람 구해요~</a>
+            </td>
+            <td>23</td>
+            <td>10</td>
+          </tr>
+          <tr>
+            <td class="female">여자</td>
+            <td class="click"><a href="#">키크고 잘생긴 사람 구합니다</a></td>
+            <td>23</td>
+            <td>99+</td>
+          </tr>
+          <tr>
+            <td class="female">여자</td>
+            <td class="click"><a href="#">같이 술 마실 사람 구해요~</a></td>
+            <td>23</td>
+            <td>10</td>
+          </tr>
+          <tr>
+            <td class="male">남자</td>
+            <td class="click">
+              <a href="#">같이 산책하고 영화 보러 갈 사람 구해요~</a>
+            </td>
+            <td>23</td>
+            <td>10</td>
+          </tr>
+          <tr>
+            <td class="male">남자</td>
+            <td class="click">
+              <a href="#">같이 산책하고 영화 보러 갈 사람 구해요~</a>
+            </td>
+            <td>23</td>
+            <td>10</td>
+          </tr>
+          <tr>
+            <td class="male">남자</td>
+            <td class="click">
+              <a href="#">같이 산책하고 영화 보러 갈 사람 구해요~</a>
+            </td>
+            <td>23</td>
+            <td>10</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="page">
+        <a href="#">&lt;</a>
+        <a href="#">1</a>
+        <a href="#">2</a>
+        <a href="#">3</a>
+        <a href="#">4</a>
+        <a href="#">5</a>
+        <a href="#">&gt;</a>
+      </div>
+    </div>
+  </body>
+</html>
+{% endblock %}

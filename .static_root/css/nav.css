@@ -1,0 +1,49 @@
+@import url(//fonts.googleapis.com/earlyaccess/nanumpenscript.css);
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+.nanumgothic * {
+  font-family: "Nanum Gothic", sans-serif;
+}
+
+.nanumpenscript * {
+  font-family: "Nanum Pen Script", cursive;
+}
+
+.nav_container {
+  width: 90vw;
+  height: 13vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 50px;
+  margin-left: 9em;
+}
+
+.nav_container .logo {
+  height: 13vh;
+  margin-top: 30px;
+}
+
+.nav_container .nav_menu {
+  width: 17vw;
+  border-right: 1px solid black;
+  font-family: "Nanum Gothic", sans-serif;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: black;
+  text-align: center;
+}
+
+.nav_container .nav_menu_last {
+  width: 17vw;
+  text-align: center;
+  font-family: "Nanum Gothic", sans-serif;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.nav_container a {
+  color: inherit;
+  text-decoration: none;
+}

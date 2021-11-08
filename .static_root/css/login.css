@@ -1,0 +1,50 @@
+.main_container {
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 40px;
+    font-family: 'nanumgothic';
+}
+
+.login_container {
+    width: 850px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+.text_name {
+    text-align: left;
+    font-size: 45px;
+    margin-top: 30px;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.input_text {
+    width: 850px;
+    height: 70px;
+    outline: none;
+    border: none;
+    border-bottom: 3px solid rgba(0, 0, 0, 0.5);
+    font-size: 60px;
+    margin-top: 3px;
+}
+
+.input_button {
+    width: 850px;
+    height: 80px;
+    text-align: center;
+    font-size: 40px;
+    margin-top: 50px;
+    color: rgba(0, 0, 0, 0.5);
+    border: none;
+}
+
+.text_signup {
+    font-size: 30px;
+    margin-top: 70px;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.text_href {
+    color: black;
+    font-weight: bold;
+}

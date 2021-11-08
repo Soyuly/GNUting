@@ -11,32 +11,29 @@
   <body>
     <div class="header">
       <div class="container">
-        <span class="head">산책할 사람 구해요~</span>
+        <span class="head">{{date.title}}</span>
         <span class="revise">
-          <a href="#">수정</a>
+          <a href="{% url 'date_edit' date.id %}">수정</a>
         </span>
         <span class="delete">
-          <a href="#">삭제</a>
+          <a href="{% url 'date_remove' date.id %}">삭제</a>
         </span>
       </div>
-      <div class="text">
-        오늘 밤에 경상대 근처에서 같이 산책하고<br />
-        영화보러 가실 분~
-      </div>
+      <div class="text">{{date.contents}}</div>
       <div class="information">
         <span class="info">부가정보</span>
         <span class="info-write">글쓴이가 입력한 정보입니다.</span>
         <div class="info-list">
           <span class="gender">성별: </span>
-          <span class="gender-spec">남자</span>
+          <span class="gender-spec">{{user.gender}}</span>
           <span class="MBTI">MBTI: </span>
-          <span class="MBTI-spec">ISFJ</span>
+          <span class="MBTI-spec">{{date.MBTI}}</span>
           <span class="height">키: </span>
-          <span class="height-spec">172cm</span>
+          <span class="height-spec">{{date.height}}cm</span>
           <span class="weight">몸무게: </span>
-          <span class="weight-spec">62kg</span>
+          <span class="weight-spec">{{date.weight}}kg</span>
           <span class="hobby">취미: </span>
-          <span class="hobby-spec">운동,게임,요리</span>
+          <span class="hobby-spec">{{date.hobby}}</span>
         </div>
       </div>
       <form action="text-right" class="reply">

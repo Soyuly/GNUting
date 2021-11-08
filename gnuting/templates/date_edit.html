@@ -6,25 +6,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{% static 'css/write.css' %}" />
-    <title>이상형 글쓰기</title>
+    <title>이상형 수정</title>
   </head>
   <body>
     <section class="container">
-      <form action="{% url 'date_write_backend' %}" method="post">
+      <form action="{% url 'date_edit_backend' date.id %}" method="post">
         {% csrf_token %}
         <!--제목 입력-->
         <input
           type="text"
           class="title"
           name="title"
-          placeholder="제목을 입력해주세요"
+          value="{{date.title}}"
+          placeholder="{{date.title}}"
         />
 
         <!--내용 입력-->
         <textarea
           class="contents"
           name="contents"
-          placeholder="내용을 입력해주세요"
+          value="{{date.contents}}"
+          placeholder="{{date.contents}}"
         ></textarea>
 
         <!--부가정보 타이틀-->
@@ -52,7 +54,9 @@
             <select name="weight" class="height">
               {% for weight in weights %}
               <option value="{{weight}}">{{weight}}kg</option>
-              {% endfor %}
+              {% if weight == date.weight %}
+              <option value="{{weight}}" selected>{{weight}}CM</option>
+              {% endif %} {% endfor %}
             </select>
           </div>
 
@@ -62,14 +66,21 @@
             <select name="MBTI">
               {% for person in mbti %}
               <option value="{{person}}">{{person}}</option>
-              {% endfor %}
+              {% if person == date.MBTI %}
+              <option value="{{person}}" selected>{{person}}</option>
+              {% endif %} {% endfor %}
             </select>
           </div>
 
           <!--취미 입력-->
           <div>
             <label for="info_content">취미</label>
-            <input type="text" name="hobby" placeholder="ex)게임, 운동" />
+            <input
+              type="text"
+              name="hobby"
+              value="{{date.hobby}}"
+              placeholder="{{date.hobby}}"
+            />
           </div>
         </article>
 

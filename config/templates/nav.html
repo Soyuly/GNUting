@@ -1,6 +1,6 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/nav.css' %}" />
-
+<script src="{% static 'js/nav.js' %}" async></script>
 <nav class="nav_container">
   {% if request.user.is_authenticated %}
   <a href="{% url 'main' user.id %}"
@@ -11,10 +11,14 @@
     ><img src="{% static 'img/logo.png' %}" class="logo"
   /></a>
   {% endif %}
-  <div class="nav_menu"><a href="{% url 'date_main' %}">이상형 찾기</a></div>
-  <div class="nav_menu"><a href="{% url 'campus_main' %}">과팅매칭</a></div>
+  <div class="nav_menu" id="date">
+    <a href="{% url 'date_main' %}">이상형 찾기</a>
+  </div>
+  <div class="nav_menu" id="campus">
+    <a href="{% url 'campus_main' %}">과팅매칭</a>
+  </div>
   {% if request.user.is_authenticated %}
-  <div class="nav_menu">
+  <div class="nav_menu" id="mypage">
     <a href="{% url 'mypage' user.id %}">마이페이지</a>
   </div>
   {% else %}
@@ -24,12 +28,25 @@
     >
   </div>
   {% endif %} {% if request.user.is_authenticated %}
-  <div class="nav_menu_last">
+  <div class="nav_menu_last" id="logout" style="color: red">
     <a href="{% url 'logout_backend' %}">로그아웃</a>
   </div>
   {% else %}
-  <div class="nav_menu_last"><a href="{% url 'login' %}">로그인</a></div>
+  <div class="nav_menu_last" id="login">
+    <a href="{% url 'login' %}">로그인</a>
+  </div>
   {% endif %}
 </nav>
-
+<script>
+  const path = "{{request.path}}";
+  console.log(path);
+  if (path.includes("date"))
+    document.querySelector("#date").style.color = "blue";
+  else if (path.includes("campus"))
+    document.querySelector("#campus").style.color = "blue";
+  else if (path.includes("mypage"))
+    document.querySelector("#mypage").style.color = "blue";
+  else if (path.includes("login"))
+    document.querySelector("#login").style.color = "blue";
+</script>
 {% block content %} {% endblock %}

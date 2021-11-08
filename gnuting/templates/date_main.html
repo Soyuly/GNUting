@@ -24,50 +24,16 @@
           </tr>
         </thead>
         <tbody>
+          {% for date in dates %}
           <tr>
-            <td class="male">남자</td>
+            <td class="male">{{user.gender}}</td>
             <td class="click">
-              <a href="#">같이 산책하고 영화 보러 갈 사람 구해요~</a>
+              <a href="{% url 'date_detail' date.id %}">{{date.title}}</a>
             </td>
             <td>23</td>
             <td>10</td>
           </tr>
-          <tr>
-            <td class="female">여자</td>
-            <td class="click"><a href="#">키크고 잘생긴 사람 구합니다</a></td>
-            <td>23</td>
-            <td>99+</td>
-          </tr>
-          <tr>
-            <td class="female">여자</td>
-            <td class="click"><a href="#">같이 술 마실 사람 구해요~</a></td>
-            <td>23</td>
-            <td>10</td>
-          </tr>
-          <tr>
-            <td class="male">남자</td>
-            <td class="click">
-              <a href="#">같이 산책하고 영화 보러 갈 사람 구해요~</a>
-            </td>
-            <td>23</td>
-            <td>10</td>
-          </tr>
-          <tr>
-            <td class="male">남자</td>
-            <td class="click">
-              <a href="#">같이 산책하고 영화 보러 갈 사람 구해요~</a>
-            </td>
-            <td>23</td>
-            <td>10</td>
-          </tr>
-          <tr>
-            <td class="male">남자</td>
-            <td class="click">
-              <a href="#">같이 산책하고 영화 보러 갈 사람 구해요~</a>
-            </td>
-            <td>23</td>
-            <td>10</td>
-          </tr>
+          {% endfor %}
         </tbody>
       </table>
       <div class="page">

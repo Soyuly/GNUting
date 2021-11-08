@@ -10,21 +10,23 @@
   </head>
   <body>
     <section class="container">
-      <form action="{% url 'campus_write_backend' %}" method="post">
+      <form action="{% url 'campus_edit_backend' campus.id %}" method="post">
         {% csrf_token %}
         <!--제목 입력-->
         <input
           type="text"
           class="title"
           name="title"
-          placeholder="제목을 입력해주세요"
+          value="{{campus.title}}"
+          placeholder="{{campus.title}}"
         />
 
         <!--내용 입력-->
         <textarea
           class="contents"
           name="contents"
-          placeholder="내용을 입력해주세요"
+          value="{{campus.contents}}"
+          placeholder="{{campus.contents}}"
         ></textarea>
 
         <!--부가정보 타이틀-->
@@ -40,7 +42,12 @@
           <!--과 입력-->
           <div>
             <label for="major">MAJOR</label>
-            <input type="text" name="major" placeholder="ex)컴퓨터과학과" />
+            <input
+              type="text"
+              name="major"
+              value="{{campus.major}}"
+              placeholder="{{campus.major}}"
+            />
           </div>
 
           <!--인원 수 입력-->

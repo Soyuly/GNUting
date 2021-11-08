@@ -18,7 +18,6 @@ from django.urls import path
 from account import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('login', views.login, name='login'),
     path('login_backend', views.login_backend, name='login_backend'),
     path('logout_backend', views.logout_backend, name='logout_backend'),

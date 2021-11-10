@@ -25,3 +25,14 @@ class Campus_Date(models.Model):
     major = CharField(max_length=100)
     gender = CharField(max_length=20)
     user_id = IntegerField()
+
+class Comment_Date(models.Model):
+  post = models.ForeignKey(Date, on_delete=models.CASCADE, null=True)
+  contents = models.CharField(max_length=1000)
+  user_id = IntegerField()
+
+class Comment_campus(models.Model):
+  post = models.ForeignKey(Campus_Date, on_delete=models.CASCADE, null=True)
+  contents = models.CharField(max_length=1000)
+  major = models.CharField(max_length=1000)
+  user_id = IntegerField()

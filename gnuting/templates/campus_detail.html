@@ -12,7 +12,7 @@
     <div class="header">
       <div class="container">
         <span class="head">{{campus.title}}</span>
-        {% if request.user.id == campus.user_id %}
+        {% if request.user.id == date.user_id %}
         <span class="revise">
           <a href="{% url 'campus_edit' campus.id %}">수정</a>
         </span>
@@ -38,10 +38,26 @@
           >
         </div>
       </div>
-      <form action="text-right" class="reply">
-        <input type="text" placeholder="댓글을 입력하세요" class="reply-text" />
-        <input type="button" value="제출" class="submit" />
+      <form class="reply" method="post">
+        {% csrf_token %}
+        <input type="text" name="contents" placeholder="댓글을 입력하세요" class="reply-text" />
+        <input type="submit" value="제출" class="submit" />
       </form>
+
+
+        {% for comment in comments %}
+        <div class="comment">
+          <div class="comment_major">{{comment.major}} &nbsp; </div>
+          <span> 익명{{comment.id}} :&nbsp;</span>
+          <span>{{comment.contents}}</span>
+          <div class="remove">
+            <a href="{% url 'campus_comment_delete' comment.id campus.id user.id %}"
+              >삭제</a
+            >
+          </div>
+        </div>
+        {% endfor %}
+      </div>
     </div>
   </body>
 </html>

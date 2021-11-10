@@ -41,11 +41,22 @@
           <span class="hobby-spec">{{date.hobby}}</span>
         </div>
       </div>
-      <form action="text-right" class="reply">
-        <input type="text" placeholder="댓글을 입력하세요" class="reply-text" />
-        <input type="button" value="제출" class="submit" />
+      <form class="reply" method="post">
+        {% csrf_token %}
+        <input
+          type="text"
+          name="contents"
+          placeholder="댓글을 입력하세요"
+          class="reply-text"
+        />
+        <input type="submit" value="제출" class="submit" />
       </form>
-    </div>
+      {% for comment in comments %}
+      <div class="comment">
+        <span style="font-weight: bold"> 익명{{comment.id}} :&nbsp;</span> <span>{{comment.contents}}</span>
+        <div class="remove"><a href="{% url 'comment_delete' comment.id date.id  %}">삭제</a></div>
+      </div>
+      {% endfor %}
   </body>
 </html>
 {% endblock %}

@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from account.models import Account
 from django.contrib import auth
-from .models import Campus_Date, Date
+from .models import Campus_Date, Date, Comment_Date, Comment_campus
 import datetime
 
 # Create your views here.
@@ -26,7 +26,14 @@ def date_main(request):
 
 def date_detail(request, date_id):
     date = get_object_or_404(Date, pk= date_id)
-    return render(request, 'date_detail.html', {'date':date})
+    comments = Comment_Date.objects.filter(post = date_id)
+    if request.method == "POST":
+        comment = Comment_Date()
+        comment.post = date
+        comment.contents = request.POST['contents']
+        comment.user_id = request.user.id
+        comment.save()
+    return render(request, 'date_detail.html', {'date':date, 'comments':comments})
 
 def date_write(request):
     mbti = ["ISTJ", "ISFJ", "INFJ", "INTJ", "ISTP", "ISFP", "INFP", "INTP",
@@ -74,6 +81,14 @@ def date_edit_backend(request, date_id):
         date.hobby = request.POST['hobby']
         date.save()
     return redirect('/date_detail/' + str(date.id))   
+
+def comment_delete(request, comment_id, date_id):
+    try:
+        comment = Comment_Date.objects.get(pk=comment_id)
+    except Comment_Date.DoesNotExist:
+        comment = None
+    comment.delete()
+    return redirect('/date_detail/' + str(date_id))
 
 #과팅 게시판
 def campus_main(request):
@@ -126,9 +141,26 @@ def campus_edit_backend(request, campus_id):
         campus.save()
     return redirect('/campus_detail/' + str(campus.id))  
  
-def campus_detail(request, campus_id):
+def campus_detail(request, campus_id, user_id):
     campus = get_object_or_404(Campus_Date, pk= campus_id)
-    return render(request, 'campus_detail.html', {'campus':campus})
+    comments = Comment_campus.objects.filter(post = campus_id)
+    user = get_object_or_404(Account, pk=user_id)
+    if request.method == "POST":
+        comment = Comment_campus()
+        comment.post = campus
+        comment.contents = request.POST['contents']
+        comment.major = user.major
+        comment.user_id = request.user.id
+        comment.save()
+    return render(request, 'campus_detail.html', {'campus':campus,'comments':comments})
+
+def campus_comment_delete(request, comment_id, campus_id,user_id):
+    try:
+        comment = Comment_campus.objects.get(pk=comment_id)
+    except Comment_campus.DoesNotExist:
+        comment = None
+    comment.delete()
+    return redirect('/campus_detail/' + str(campus_id) + '/' + str(user_id))
 
 def mypage(request, user_id):
     user = get_object_or_404(Account, pk=user_id)

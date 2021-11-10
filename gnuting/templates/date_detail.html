@@ -54,7 +54,9 @@
       {% for comment in comments %}
       <div class="comment">
         <span style="font-weight: bold"> 익명{{comment.id}} :&nbsp;</span> <span>{{comment.contents}}</span>
+        {% if request.user.id == comment.user_id %}
         <div class="remove"><a href="{% url 'comment_delete' comment.id date.id  %}">삭제</a></div>
+        {% endif %}
       </div>
       {% endfor %}
   </body>

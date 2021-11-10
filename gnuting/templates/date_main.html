@@ -10,7 +10,16 @@
   </head>
   <body>
     <div class="board">
+      {% if request.user.is_authenticated %}
       <a href="{% url 'date_write' %}" class="write">글쓰기</a>
+      {% else %}
+      <a
+        href="{% url 'login' %}"
+        onclick="alert('로그인이 필요합니다');"
+        class="write"
+        >글쓰기</a
+      >
+      {% endif %}
       <table class="board_list">
         <caption>
           게시판 목록

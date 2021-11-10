@@ -12,9 +12,9 @@
     <div class="header">
       <div class="container">
         <span class="head">{{campus.title}}</span>
-        {% if request.user.id == date.user_id %}
+        {% if request.user.id == campus.user_id %}
         <span class="revise">
-          <a href="{% url 'campus_edit' campus.id %}">수정</a>
+          <a href="{% url 'campus_edit' campus.id user.id %}">수정</a>
         </span>
         <span class="delete">
           <a href="{% url 'campus_remove' campus.id %}">삭제</a>

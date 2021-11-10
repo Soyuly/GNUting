@@ -121,14 +121,14 @@ def campus_write_backend(request, user_id):
         campus.gender = user.gender
         campus.user_id = request.user.id
         campus.save()
-    return redirect('/campus_detail/' + str(campus.id)) 
+    return redirect('/campus_detail/' + str(campus.id) + '/' + str(user_id))
 
 def campus_remove(request, campus_id):
     campus = get_object_or_404(Campus_Date, pk= campus_id)
     campus.delete()
     return redirect('/campus_main')
 
-def campus_edit_backend(request, campus_id):
+def campus_edit_backend(request, campus_id, user_id):
     campus = get_object_or_404(Campus_Date, pk= campus_id)
     if request.method == "POST":
         campus.title = request.POST['title']
@@ -138,8 +138,7 @@ def campus_edit_backend(request, campus_id):
         campus.month = request.POST['month']
         campus.day = request.POST['day']
         campus.hour = request.POST['hour']
-        campus.save()
-    return redirect('/campus_detail/' + str(campus.id))  
+    return redirect('/campus_detail/' + str(campus_id) + '/' + str(user_id))
  
 def campus_detail(request, campus_id, user_id):
     campus = get_object_or_404(Campus_Date, pk= campus_id)

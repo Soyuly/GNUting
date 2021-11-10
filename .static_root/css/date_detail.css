@@ -103,3 +103,19 @@
   height: 50px;
   font-size: 15px;
 }
+
+.comment {
+  display: flex;
+  margin-bottom: 5px;
+  margin: 0px;
+}
+
+.remove {
+  margin-left: auto;
+  color: red;
+}
+
+.comment a {
+  color: red;
+  text-decoration: none;
+}

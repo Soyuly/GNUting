@@ -18,10 +18,7 @@
           {% csrf_token %}
         <div class="text_name">학과</div>
         <div>
-          <select name="major" id="depart" class="input_select">
-            <option value="">{{user.major}}</option>
-            <option value="컴퓨터과학과" name="major">컴퓨터과학과</option>
-          </select>
+          <input type="text" name="major" id="depart" value="{{user.major}}" placeholder="{{user.major}}" class="input_select">
         </div>
         <div class="text_name">이름</div>
         <div>
@@ -29,7 +26,7 @@
         </div>
         <div class="text_name">닉네임</div>
         <div>
-          <input type="text" name="nickname" class="input_text" placeholder="{{user.nickname}}"/>
+          <input type="text" name="nickname" class="input_text" value="{{user.nickname}}" placeholder="{{user.nickname}}"/>
         </div>
         <div class="text_name">생년월일</div>
         <div>

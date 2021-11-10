@@ -15,6 +15,7 @@
         <a href="./index.html">
           <img src="./img/logo.png" alt="" />
         </a>
+
       </div>
       <form action="{% url 'login_backend' %}" method="POST">
       {% csrf_token %}
@@ -41,6 +42,11 @@
       </div>
     </div>
   </form>
+  {% if error == 1 %}
+  <script>
+      alert('아이디와 비밀번호를 잘못 입력하셨습니다! 다시 입력해 주세요');
+  </script>
+  {% endif %}
   </body>
 </html>
 {% endblock %}

@@ -22,6 +22,7 @@ def login_backend(request):
         return redirect('main/'+str(request.user.id))
     else:
         error = 1
+        print(error)
         return render(request, 'login.html', {'error': error})
 
 

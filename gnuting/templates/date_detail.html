@@ -13,11 +13,16 @@
       <div class="container">
         <span class="head">{{date.title}}</span>
         <span class="revise">
+          <script>
+            console.log("{{request.user.id}}");
+          </script>
+          {% if request.user.id == date.user_id %}
           <a href="{% url 'date_edit' date.id %}">수정</a>
         </span>
         <span class="delete">
           <a href="{% url 'date_remove' date.id %}">삭제</a>
         </span>
+        {% endif %}
       </div>
       <div class="text">{{date.contents}}</div>
       <div class="information">
@@ -25,7 +30,7 @@
         <span class="info-write">글쓴이가 입력한 정보입니다.</span>
         <div class="info-list">
           <span class="gender">성별: </span>
-          <span class="gender-spec">{{user.gender}}</span>
+          <span class="gender-spec">{{date.gender}}</span>
           <span class="MBTI">MBTI: </span>
           <span class="MBTI-spec">{{date.MBTI}}</span>
           <span class="height">키: </span>
@@ -38,6 +43,7 @@
       </div>
       <form action="text-right" class="reply">
         <input type="text" placeholder="댓글을 입력하세요" class="reply-text" />
+        <input type="button" value="제출" class="submit" />
       </form>
     </div>
   </body>

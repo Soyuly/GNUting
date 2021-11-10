@@ -10,7 +10,16 @@
   </head>
   <body>
     <div class="board">
+      {% if request.user.is_authenticated %}
       <a href="{% url 'campus_write' %}" class="write">글쓰기</a>
+      {% else %}
+      <a
+        href="{% url 'login' %}"
+        class="write"
+        onclick="alert('로그인을 해주세요!')"
+        >글쓰기</a
+      >
+      {% endif %}
       <table class="board_list">
         <caption>
           게시판 목록
@@ -31,7 +40,7 @@
               <a href="{% url 'campus_detail' campus.id %}">{{campus.title}}</a>
             </td>
             <td>{{campus.count}}명</td>
-            <td class="gender-man">남자</td>
+            <td class="gender-man">{{campus.gender}}</td>
           </tr>
           {% endfor %}
         </tbody>

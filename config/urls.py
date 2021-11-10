@@ -29,7 +29,7 @@ urlpatterns = [
     path('date_edit/<str:date_id>', views.date_edit, name='date_edit'),
 
     #이상형 게시판 백엔드
-    path('date_write_backend', views.date_write_backend, name='date_write_backend'),
+    path('date_write_backend/<str:user_id>', views.date_write_backend, name='date_write_backend'),
     path('date_remove/<str:date_id>', views.date_remove, name='date_remove'),
     path('date_edit_backend/<str:date_id>', views.date_edit_backend, name='date_edit_backend'),
     
@@ -41,7 +41,7 @@ urlpatterns = [
     path('campus_edit/<str:campus_id>', views.campus_edit, name='campus_edit'),
 
     #과팅 게시판 백엔드
-    path('campus_write_backend', views.campus_write_backend, name='campus_write_backend'),
+    path('campus_write_backend/<str:user_id>', views.campus_write_backend, name='campus_write_backend'),
     path('campus_remove/<str:campus_id>', views.campus_remove, name='campus_remove'),
     path('campus_edit_backend/<str:campus_id>', views.campus_edit_backend, name='campus_edit_backend'),
     path('mypage/<str:user_id>', views.mypage, name='mypage'),

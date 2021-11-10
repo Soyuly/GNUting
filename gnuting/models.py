@@ -9,6 +9,9 @@ class Date(models.Model):
     weight = IntegerField()
     MBTI = CharField(max_length=100)
     hobby = CharField(max_length=300)
+    gender = CharField(max_length=20)
+    age = IntegerField()
+    user_id = IntegerField()
 
 
 class Campus_Date(models.Model):
@@ -19,3 +22,6 @@ class Campus_Date(models.Model):
     month = IntegerField()
     day = IntegerField()
     hour = IntegerField()
+    major = CharField(max_length=100)
+    gender = CharField(max_length=20)
+    user_id = IntegerField()

@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from account.models import Account
 from django.contrib import auth
 from .models import Campus_Date, Date
+import datetime
 
 # Create your views here.
 
@@ -20,7 +21,7 @@ def main_login(request, user_id):
 
 #이상형 게시판
 def date_main(request):
-    dates = Date.objects.all()
+    dates = Date.objects.order_by('-id')
     return render(request, 'date_main.html',{'dates':dates})
 
 def date_detail(request, date_id):
@@ -39,8 +40,11 @@ def date_edit(request, date_id):
     return render(request,'date_edit.html',{'date':date, 'heights': range(140, 191), 'weights':range(30,110), 'mbti': mbti})
 
 #이상형 게시판 CRUD 백엔드
-def date_write_backend(request):
+def date_write_backend(request, user_id):
+    today = datetime.date.today()
+    yyyy = today.year
     date = Date()
+    user = get_object_or_404(Account, pk=user_id)
     if request.method == "POST":
         date.title = request.POST['title']
         date.contents = request.POST['contents']
@@ -48,8 +52,11 @@ def date_write_backend(request):
         date.weight = request.POST['weight']
         date.MBTI = request.POST['MBTI']
         date.hobby = request.POST['hobby']
+        date.user_id = request.user.id
+        date.gender = user.gender
+        date.age = yyyy - user.birth.year + 1
         date.save()
-    return redirect('date_detail/' + str(date.id))
+    return redirect('/date_detail/' + str(date.id))
 
 def date_remove(request, date_id):
     date = get_object_or_404(Date, pk= date_id)
@@ -68,14 +75,13 @@ def date_edit_backend(request, date_id):
         date.save()
     return redirect('/date_detail/' + str(date.id))   
 
+#과팅 게시판
 def campus_main(request):
-    campuses = Campus_Date.objects.all()
+    campuses = Campus_Date.objects.order_by('-id')
     return render(request, 'campus_main.html',{'campuses':campuses})
-
 
 def campus_detail(request):
     return render(request, 'campus_detail.html')
-
 
 def campus_write(request):
     return render(request, 'campus_write.html', {'persons': range(1, 11), 'months': range(1, 13), 'days': range(1, 60), 'hours': range(0, 24)})
@@ -84,8 +90,9 @@ def campus_edit(request,campus_id):
     campus = get_object_or_404(Campus_Date, pk= campus_id)
     return render(request, 'campus_edit.html', {'campus':campus, 'persons': range(1, 11), 'months': range(1, 13), 'days': range(1, 60), 'hours': range(0, 24)})
 
-
-def campus_write_backend(request):
+#과팅 게시판 CRUD 백엔드
+def campus_write_backend(request, user_id):
+    user = get_object_or_404(Account, pk=user_id)
     campus = Campus_Date()
     if request.method == "POST":
         campus.title = request.POST['title']
@@ -95,6 +102,9 @@ def campus_write_backend(request):
         campus.month = request.POST['month']
         campus.day = request.POST['day']
         campus.hour = request.POST['hour']
+        campus.major = user.major
+        campus.gender = user.gender
+        campus.user_id = request.user.id
         campus.save()
     return redirect('/campus_detail/' + str(campus.id)) 
 

@@ -12,12 +12,14 @@
     <div class="header">
       <div class="container">
         <span class="head">{{campus.title}}</span>
+        {% if request.user.id == date.user_id %}
         <span class="revise">
           <a href="{% url 'campus_edit' campus.id %}">수정</a>
         </span>
         <span class="delete">
           <a href="{% url 'campus_remove' campus.id %}">삭제</a>
         </span>
+        {% endif %}
       </div>
       <div class="text">{{campus.contents}}</div>
       <div class="information">
@@ -25,7 +27,7 @@
         <span class="info-write">글쓴이가 입력한 정보입니다.</span>
         <div class="info-list">
           <span class="gender">성별: </span>
-          <span class="gender-spec">{{user.gender}}</span>
+          <span class="gender-spec">{{campus.gender}}</span>
           <span class="major">학과: </span>
           <span class="major-spec">{{campus.major}}</span>
           <span class="count">인원수: </span>
@@ -38,6 +40,7 @@
       </div>
       <form action="text-right" class="reply">
         <input type="text" placeholder="댓글을 입력하세요" class="reply-text" />
+        <input type="button" value="제출" class="submit" />
       </form>
     </div>
   </body>

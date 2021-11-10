@@ -10,7 +10,16 @@
   </head>
   <body>
     <div class="board">
+      {% if request.user.is_authenticated %}
       <a href="{% url 'date_write' %}" class="write">글쓰기</a>
+      {% else %}
+      <a
+        href="{% url 'login' %}"
+        class="write"
+        onclick="alert('로그인을 해주세요!')"
+        >글쓰기</a
+      >
+      {% endif %}
       <table class="board_list">
         <caption>
           게시판 목록
@@ -20,18 +29,18 @@
             <th>성별</th>
             <th>제목</th>
             <th>나이</th>
-            <th>좋아요</th>
+            <th>MBTI</th>
           </tr>
         </thead>
         <tbody>
           {% for date in dates %}
           <tr>
-            <td class="male">{{user.gender}}</td>
+            <td class="male">{{date.gender}}</td>
             <td class="click">
               <a href="{% url 'date_detail' date.id %}">{{date.title}}</a>
             </td>
-            <td>23</td>
-            <td>10</td>
+            <td>{{date.age}}</td>
+            <td>{{date.MBTI}}</td>
           </tr>
           {% endfor %}
         </tbody>

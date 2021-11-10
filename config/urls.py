@@ -31,12 +31,14 @@ urlpatterns = [
     #이상형 게시판 백엔드
     path('date_write_backend/<str:user_id>', views.date_write_backend, name='date_write_backend'),
     path('date_remove/<str:date_id>', views.date_remove, name='date_remove'),
+    path('comment_delete/<str:comment_id>/<str:date_id>', views.comment_delete, name='comment_delete'),
     path('date_edit_backend/<str:date_id>', views.date_edit_backend, name='date_edit_backend'),
     
 
     #과팅 게시판 홈페이지
     path('campus_main', views.campus_main, name='campus_main'),
-    path('campus_detail/<str:campus_id>', views.campus_detail, name='campus_detail'),
+    path('campus_detail/<str:campus_id>/<str:user_id>', views.campus_detail, name='campus_detail'),
+    path('campus_comment_delete/<str:comment_id>/<str:campus_id>/<str:user_id>', views.campus_comment_delete, name='campus_comment_delete'),
     path('campus_write', views.campus_write, name='campus_write'),
     path('campus_edit/<str:campus_id>', views.campus_edit, name='campus_edit'),
 

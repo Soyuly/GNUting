@@ -20,7 +20,7 @@
 }
 
 .revise {
-  margin-left: 70%;
+  margin-left: 73%;
 }
 
 .delete {
@@ -90,7 +90,14 @@
 }
 
 .reply-text {
-  width: 100%;
+  width: 97%;
   height: 50px;
   font-size: 20px;
+}
+
+.submit {
+  float: right;
+  width: 32px;
+  height: 52px;
+  font-size: 15px;
 }

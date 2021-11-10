@@ -10,7 +10,10 @@
   </head>
   <body>
     <section class="container">
-      <form action="{% url 'campus_edit_backend' campus.id %}" method="post">
+      <form
+        action="{% url 'campus_edit_backend' campus.id  user.id %}"
+        method="post"
+      >
         {% csrf_token %}
         <!--제목 입력-->
         <input

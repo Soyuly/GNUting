@@ -40,12 +40,12 @@ urlpatterns = [
     path('campus_detail/<str:campus_id>/<str:user_id>', views.campus_detail, name='campus_detail'),
     path('campus_comment_delete/<str:comment_id>/<str:campus_id>/<str:user_id>', views.campus_comment_delete, name='campus_comment_delete'),
     path('campus_write', views.campus_write, name='campus_write'),
-    path('campus_edit/<str:campus_id>/<str:user_id>', views.campus_edit, name='campus_edit'),
+    path('campus_edit/<str:campus_id>', views.campus_edit, name='campus_edit'),
 
     #과팅 게시판 백엔드
     path('campus_write_backend/<str:user_id>', views.campus_write_backend, name='campus_write_backend'),
     path('campus_remove/<str:campus_id>', views.campus_remove, name='campus_remove'),
-    path('campus_edit_backend/<str:campus_id>', views.campus_edit_backend, name='campus_edit_backend'),
+    path('campus_edit_backend/<str:campus_id>/<str:user_id>', views.campus_edit_backend, name='campus_edit_backend'),
     path('mypage/<str:user_id>', views.mypage, name='mypage'),
     path('', include('account.urls')),
 ]

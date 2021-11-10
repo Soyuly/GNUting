@@ -138,6 +138,7 @@ def campus_edit_backend(request, campus_id, user_id):
         campus.month = request.POST['month']
         campus.day = request.POST['day']
         campus.hour = request.POST['hour']
+        campus.save()
     return redirect('/campus_detail/' + str(campus_id) + '/' + str(user_id))
  
 def campus_detail(request, campus_id, user_id):

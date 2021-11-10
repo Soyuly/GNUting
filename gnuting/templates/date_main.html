@@ -35,7 +35,11 @@
         <tbody>
           {% for date in dates %}
           <tr>
+            {% if date.gender == "남자" %}
             <td class="male">{{date.gender}}</td>
+            {% else %}
+            <td class="female">{{date.gender}}</td>
+            {% endif %}
             <td class="click">
               <a href="{% url 'date_detail' date.id %}">{{date.title}}</a>
             </td>

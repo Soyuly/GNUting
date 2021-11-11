@@ -41,7 +41,15 @@
             <td class="female">{{date.gender}}</td>
             {% endif %}
             <td class="click">
+              {% if request.user.is_authenticated %}
               <a href="{% url 'date_detail' date.id %}">{{date.title}}</a>
+              {% else %}
+              <a
+                href="{% url 'login' %}"
+                onclick="alert('로그인이 필요합니다!');"
+                >{{date.title}}</a
+              >
+              {% endif %}
             </td>
             <td>{{date.age}}</td>
             <td>{{date.MBTI}}</td>

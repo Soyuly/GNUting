@@ -37,9 +37,17 @@
           <tr>
             <td>{{campus.major}}</td>
             <td class="click">
+              {% if request.user.is_authenticated %}
               <a href="{% url 'campus_detail' campus.id user.id %}"
                 >{{campus.title}}</a
               >
+              {% else %}
+              <a
+                href="{% url 'login' %}"
+                onclick="alert('로그인이 필요합니다!');"
+                >{{campus.title}}</a
+              >
+              {% endif %}
             </td>
             <td>{{campus.count}}명</td>
             {% if campus.gender == "남자" %}

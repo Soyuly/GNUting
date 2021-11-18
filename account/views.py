@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib import auth
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.db import IntegrityError
 
 # Create your views here.
 
@@ -18,7 +19,7 @@ def login_backend(request):
     user = auth.authenticate(request, username=username, password=password)
     if user is not None:
         auth.login(request, user)
-
+        print(user.id)
         return redirect('main/'+str(request.user.id))
     else:
         error = 1
@@ -36,17 +37,22 @@ def signup(request):
 
 
 def signup_backend(request):
-    account = Account()
-    account.name = request.POST['name']
-    account.nickname = request.POST['nickname']
-    account.major = request.POST['major']
-    account.birth = request.POST['birth']
-    account.gender = request.POST['gender']
-    account.user = User.objects.create_user(
-        username=request.POST['id'], password=request.POST['password'])
+    if request.method  == 'POST':
+        account = Account()
+        account.name = request.POST['name']
+        account.nickname = request.POST['nickname']
+        account.major = request.POST['major']
+        account.birth = request.POST['birth']
+        account.gender = request.POST['gender']
 
-    account.save()
-    print('회원가입')
+        if User.objects.filter(username=request.POST['id']).exists():
+            error = 1
+            return render(request, 'sign_up.html', {'error': error})
+            
+        account.user = User.objects.create_user(
+        username=request.POST['id'], password=request.POST['password'])
+        account.save()
+        print('회원가입')
     user = auth.authenticate(
         request, username=request.POST['id'], password=request.POST['password'])
 

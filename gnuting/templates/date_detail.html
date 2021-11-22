@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>이상형 게시글</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <link rel="stylesheet" href="{% static 'css/date_detail.css' %}" />
   </head>
   <body>
@@ -41,8 +42,8 @@
           <span class="hobby-spec">{{date.hobby}}</span>
         </div>
       </div>
-      <form class="reply" method="post">
-        {% csrf_token %}
+    
+     
         <input
           type="text"
           name="contents"
@@ -50,15 +51,83 @@
           class="reply-text"
         />
         <input type="submit" value="제출" class="submit" />
-      </form>
+      
       {% for comment in comments %}
-      <div class="comment">
+      <div class="comment" class ="comment{{comment.id}}">
         <span style="font-weight: bold"> 익명{{comment.id}} :&nbsp;</span> <span>{{comment.contents}}</span>
         {% if request.user.id == comment.user_id %}
-        <div class="remove"><a href="{% url 'comment_delete' comment.id date.id  %}">삭제</a></div>
+        <div class="remove"><a onclick="deleteComment({{comment.id}});">삭제</a></div>
         {% endif %}
       </div>
       {% endfor %}
+      
+      
+
+      <script>
+          const btnAjax = document.querySelector(".submit");
+        let count = 0;
+      btnAjax.addEventListener("click", (e) => {
+      const contents = document.querySelector('.reply-text').value;
+
+
+      const param = {
+    'contents' : contents,
+    'user_id' : {{request.user.id}},
+    'post_id' : {{date.id}},
+
+      };
+
+      $.ajax({
+        url: {% url 'reply' %},
+        type: "POST",
+        headers: {
+          "X-CSRFTOKEN": '{{csrf_token}}'
+        },
+        data: JSON.stringify(param),
+        success: (data) => {
+         
+          console.log(data);
+          count ++;
+          $(".submit").after("<div class='comment'><span style='font-weight: bold'> 익명" + data.id + ":&nbsp;</span> <span>" + data.contents + "</span>"
+          + "<div class='remove'><a onclick='deleteComment({{comment.id}});''>삭제</a></div></div>");
+       
+        },
+        error: () => {
+          alert("댓글 입력에 실패했습니다.");
+        },
+      });
+      return false;
+    });
+
+    const deleteComment = (id) =>{
+      const param = {
+        'comment_id' : id,
+      };
+      $.ajax({
+        url: {% url 'comment_delete' %},
+        type: "POST",
+        headers: {
+          "X-CSRFTOKEN": '{{csrf_token}}'
+        },
+        data: JSON.stringify(param),
+        success: (data) => {
+          if(data.delete == true){
+            alert("댓글을 정상적으로 삭제하였습니다.")
+            const replydiv = document.querySelector('.comment{{comment.id}}')
+            replydiv.remove();
+          }
+        },
+        error: () => {
+          alert("댓글 삭제 실패.");
+        },
+      });
+
+
+
+
+    }
+
+      </script>
   </body>
 </html>
 {% endblock %}

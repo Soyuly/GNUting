@@ -4,14 +4,19 @@ from account.models import Account
 from django.contrib import auth
 from .models import Campus_Date, Date, Comment_Date, Comment_campus
 import datetime
-
+import json
+from django.http import JsonResponse
 # Create your views here.
 
-#로그인이 안되었을때 main 홈페이지
+# 로그인이 안되었을때 main 홈페이지
+
+
 def main(request):
     return render(request, 'main.html')
 
-#로그인 후 main
+# 로그인 후 main
+
+
 @login_required
 def main_login(request, user_id):
     user = get_object_or_404(Account, pk=user_id)
@@ -19,34 +24,41 @@ def main_login(request, user_id):
         print('성공')
         return render(request, 'main.html', {'user': user})
 
-#이상형 게시판
+# 이상형 게시판
+
+
 def date_main(request):
     dates = Date.objects.order_by('-id')
-    return render(request, 'date_main.html',{'dates':dates})
+    return render(request, 'date_main.html', {'dates': dates})
+
 
 def date_detail(request, date_id):
-    date = get_object_or_404(Date, pk= date_id)
-    comments = Comment_Date.objects.filter(post = date_id)
+    date = get_object_or_404(Date, pk=date_id)
+    comments = Comment_Date.objects.filter(post=date_id)
     if request.method == "POST":
         comment = Comment_Date()
         comment.post = date
         comment.contents = request.POST['contents']
         comment.user_id = request.user.id
         comment.save()
-    return render(request, 'date_detail.html', {'date':date, 'comments':comments})
+    return render(request, 'date_detail.html', {'date': date, 'comments': comments})
+
 
 def date_write(request):
     mbti = ["ISTJ", "ISFJ", "INFJ", "INTJ", "ISTP", "ISFP", "INFP", "INTP",
             "ESTP", "ESFP", "ENFP", "ENTP", "ESTJ", "ESFJ", "ENFJ", "ENTJ"]
-    return render(request, 'date_write.html', {'heights': range(140, 191), 'weights':range(30,110), 'mbti': mbti})
+    return render(request, 'date_write.html', {'heights': range(140, 191), 'weights': range(30, 110), 'mbti': mbti})
+
 
 def date_edit(request, date_id):
     mbti = ["ISTJ", "ISFJ", "INFJ", "INTJ", "ISTP", "ISFP", "INFP", "INTP",
             "ESTP", "ESFP", "ENFP", "ENTP", "ESTJ", "ESFJ", "ENFJ", "ENTJ"]
-    date = get_object_or_404(Date, pk= date_id)
-    return render(request,'date_edit.html',{'date':date, 'heights': range(140, 191), 'weights':range(30,110), 'mbti': mbti})
+    date = get_object_or_404(Date, pk=date_id)
+    return render(request, 'date_edit.html', {'date': date, 'heights': range(140, 191), 'weights': range(30, 110), 'mbti': mbti})
 
-#이상형 게시판 CRUD 백엔드
+# 이상형 게시판 CRUD 백엔드
+
+
 def date_write_backend(request, user_id):
     today = datetime.date.today()
     yyyy = today.year
@@ -65,13 +77,15 @@ def date_write_backend(request, user_id):
         date.save()
     return redirect('/date_detail/' + str(date.id))
 
+
 def date_remove(request, date_id):
-    date = get_object_or_404(Date, pk= date_id)
+    date = get_object_or_404(Date, pk=date_id)
     date.delete()
     return redirect('/date_main')
 
+
 def date_edit_backend(request, date_id):
-    date = get_object_or_404(Date, pk= date_id)
+    date = get_object_or_404(Date, pk=date_id)
     if request.method == "POST":
         date.title = request.POST['title']
         date.contents = request.POST['contents']
@@ -80,32 +94,45 @@ def date_edit_backend(request, date_id):
         date.MBTI = request.POST['MBTI']
         date.hobby = request.POST['hobby']
         date.save()
-    return redirect('/date_detail/' + str(date.id))   
+    return redirect('/date_detail/' + str(date.id))
 
-def comment_delete(request, comment_id, date_id):
-    try:
-        comment = Comment_Date.objects.get(pk=comment_id)
-    except Comment_Date.DoesNotExist:
-        comment = None
-    comment.delete()
-    return redirect('/date_detail/' + str(date_id))
 
-#과팅 게시판
+def comment_delete(request):
+    jsonObject = json.loads(request.body)
+    context = {
+        'delete': False
+    }
+    comment = Comment_Date.objects.filter(id=jsonObject.get('comment_id'))
+    if comment is not None:
+        comment.delete()
+        context = {
+            'delete': True
+        }
+        return JsonResponse(context)
+    return JsonResponse(context)
+# 과팅 게시판
+
+
 def campus_main(request):
     campuses = Campus_Date.objects.order_by('-id')
-    return render(request, 'campus_main.html',{'campuses':campuses})
+    return render(request, 'campus_main.html', {'campuses': campuses})
+
 
 def campus_detail(request):
     return render(request, 'campus_detail.html')
 
+
 def campus_write(request):
     return render(request, 'campus_write.html', {'persons': range(1, 11), 'months': range(1, 13), 'days': range(1, 60), 'hours': range(0, 24)})
 
-def campus_edit(request,campus_id):
-    campus = get_object_or_404(Campus_Date, pk= campus_id)
-    return render(request, 'campus_edit.html', {'campus':campus, 'persons': range(1, 11), 'months': range(1, 13), 'days': range(1, 60), 'hours': range(0, 24)})
 
-#과팅 게시판 CRUD 백엔드
+def campus_edit(request, campus_id):
+    campus = get_object_or_404(Campus_Date, pk=campus_id)
+    return render(request, 'campus_edit.html', {'campus': campus, 'persons': range(1, 11), 'months': range(1, 13), 'days': range(1, 60), 'hours': range(0, 24)})
+
+# 과팅 게시판 CRUD 백엔드
+
+
 def campus_write_backend(request, user_id):
     user = get_object_or_404(Account, pk=user_id)
     campus = Campus_Date()
@@ -123,13 +150,15 @@ def campus_write_backend(request, user_id):
         campus.save()
     return redirect('/campus_detail/' + str(campus.id) + '/' + str(user_id))
 
+
 def campus_remove(request, campus_id):
-    campus = get_object_or_404(Campus_Date, pk= campus_id)
+    campus = get_object_or_404(Campus_Date, pk=campus_id)
     campus.delete()
     return redirect('/campus_main')
 
+
 def campus_edit_backend(request, campus_id, user_id):
-    campus = get_object_or_404(Campus_Date, pk= campus_id)
+    campus = get_object_or_404(Campus_Date, pk=campus_id)
     if request.method == "POST":
         campus.title = request.POST['title']
         campus.contents = request.POST['contents']
@@ -140,10 +169,11 @@ def campus_edit_backend(request, campus_id, user_id):
         campus.hour = request.POST['hour']
         campus.save()
     return redirect('/campus_detail/' + str(campus_id) + '/' + str(user_id))
- 
+
+
 def campus_detail(request, campus_id, user_id):
-    campus = get_object_or_404(Campus_Date, pk= campus_id)
-    comments = Comment_campus.objects.filter(post = campus_id)
+    campus = get_object_or_404(Campus_Date, pk=campus_id)
+    comments = Comment_campus.objects.filter(post=campus_id)
     user = get_object_or_404(Account, pk=user_id)
     if request.method == "POST":
         comment = Comment_campus()
@@ -152,9 +182,10 @@ def campus_detail(request, campus_id, user_id):
         comment.major = user.major
         comment.user_id = request.user.id
         comment.save()
-    return render(request, 'campus_detail.html', {'campus':campus,'comments':comments})
+    return render(request, 'campus_detail.html', {'campus': campus, 'comments': comments})
 
-def campus_comment_delete(request, comment_id, campus_id,user_id):
+
+def campus_comment_delete(request, comment_id, campus_id, user_id):
     try:
         comment = Comment_campus.objects.get(pk=comment_id)
     except Comment_campus.DoesNotExist:
@@ -162,8 +193,30 @@ def campus_comment_delete(request, comment_id, campus_id,user_id):
     comment.delete()
     return redirect('/campus_detail/' + str(campus_id) + '/' + str(user_id))
 
+
 def mypage(request, user_id):
     user = get_object_or_404(Account, pk=user_id)
     if request.user.is_authenticated:
         print('성공')
         return render(request, 'mypage.html', {'user': user})
+
+
+def reply(request):
+    # JS에서 전송한 parm을 request.body로 저장되어
+    # json.load를 통해 jsonObject에 저장한다.
+    jsonObject = json.loads(request.body)
+
+    # jsonObject로 부터 데이터를 받아서 모델에
+    # 데이터를 저장한 다음
+    reply = Comment_Date.objects.create(
+        post_id=jsonObject.get('post_id'),
+        contents=jsonObject.get('contents'),
+        user_id=jsonObject.get('user_id')
+    )
+    reply.save()
+    context = {
+        'contents': reply.contents,
+        'id': reply.id
+    }
+
+    return JsonResponse(context)
